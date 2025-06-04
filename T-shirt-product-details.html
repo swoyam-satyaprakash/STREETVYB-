@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Shirt Product Details - STREETVYB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 pt-20">
+    <nav class="bg-black text-white p-4 flex justify-between items-center fixed top-0 left-0 w-full z-50 shadow-lg">
+        <div class="flex items-center space-x-4">
+            <img src="img/logo/logo.svg" alt="STREETVYB Logo" class="h-10 w-10">
+            <h1 class="text-2xl font-bold">STREETVYB</h1>
+        </div>
+        <ul class="flex space-x-6">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hoodies.html">Hoodies</a></li>
+            <li><a href="tshirt.html" class="font-bold">T-shirt</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+        </ul>
+
+        <form action="search.html" method="GET" class="relative">
+            <div class="relative">
+                <input type="text" name="query" placeholder="Search for products..."
+                    class="px-10 py-2 w-72 bg-gray-700 text-white rounded-md focus:outline-none">
+                <!-- Search Icon -->
+                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-4.35-4.35M16 10.5A5.5 5.5 0 1110.5 5 5.5 5.5 0 0116 10.5z" />
+                </svg>
+            </div>
+        </form>
+
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+
+        <!-- LEFT: Image Thumbnails -->
+        <div class="flex md:flex-col gap-2 md:gap-3 justify-center items-center">
+            <img src="img/tshirt/t1.png" class="w-16 h-20 object-cover border rounded cursor-pointer" />
+            <img src="img/tshirt/t1.png" class="w-16 h-20 object-cover border rounded cursor-pointer" />
+            <img src="img/tshirt/t1.png" class="w-16 h-20 object-cover border rounded cursor-pointer" />
+            <img src="img/tshirt/t1.png" class="w-16 h-20 object-cover border rounded cursor-pointer" />
+        </div>
+
+        <!-- CENTER: Main Image -->
+        <div class="w-full h-full flex justify-center">
+            <img src="img/tshirt/t1.png" class="w-full max-w-[550px] h-[750px] object-cover rounded-xl shadow-md" />
+        </div>
+        <!-- RIGHT: Product Info -->
+        <div>
+            <h1 class="text-3xl font-semibold leading-tight">Wild Grey Relaxed Fit T-Shirt - <br>100% Cotton</h1>
+            <p class="text-xl mt-3 font-bold">₹ 799.00 <span class="text-sm font-normal text-gray-600">M.R.P</span></p>
+            <p class="text-sm text-gray-600">(incl. of all taxes)</p>
+
+            <!-- EMI Section -->
+            <div class="mt-3 flex items-center gap-3">
+                <div class="border px-4 py-2 text-sm rounded">
+                    or Pay <span class="text-blue-600 font-semibold">₹266</span> now & rest later at 0% EMI on <span
+                        class="font-semibold">snapmint</span>
+                </div>
+                <button class="bg-black text-white px-4 py-2 text-sm rounded">BUY ON EMI</button>
+            </div>
+
+            <hr class="my-5">
+
+            <!-- Rating -->
+            <div class="text-yellow-500 text-sm font-medium">★ 5.0</div>
+
+            <!-- Sizes -->
+            <div class="mt-4">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="font-medium">Size:</p>
+                    <a href="#" class="text-sm text-gray-500 hover:underline">Size chart</a>
+                </div>
+                <div class="flex gap-2 flex-wrap">
+                    <button class="size-btn border px-4 py-2 rounded hover:bg-black hover:text-white"
+                        data-size="XS">XS</button>
+                    <button class="size-btn border px-4 py-2 rounded hover:bg-black hover:text-white"
+                        data-size="S">S</button>
+                    <button class="size-btn border px-4 py-2 rounded hover:bg-black hover:text-white"
+                        data-size="M">M</button>
+                    <button class="size-btn border px-4 py-2 rounded hover:bg-black hover:text-white"
+                        data-size="L">L</button>
+                    <button class="size-btn border px-4 py-2 rounded hover:bg-black hover:text-white"
+                        data-size="XL">XL</button>
+                    <button class="size-btn border px-4 py-2 rounded hover:bg-black hover:text-white"
+                        data-size="XXL">XXL</button>
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="mt-6">
+                <p class="font-medium mb-2">Quantity:</p>
+                <div class="flex items-center gap-3">
+                    <button id="decreaseQty" class="border px-3 py-1 text-lg rounded">−</button>
+                    <span id="quantity">1</span>
+                    <button id="increaseQty" class="border px-3 py-1 text-lg rounded">+</button>
+                </div>
+            </div>
+
+            <!-- ❤️ Wishlist Button -->
+            <!-- ❤️ Wishlist Button -->
+            <button id="wishlist-btn-1" onclick="toggleWishlistById(1)"
+                class="text-gray-400 hover:text-red-500 text-xl mt-2">
+                <i class="fa-solid fa-heart" id="heart-icon-1"></i>
+            </button>
+
+
+
+
+
+            <!-- Buttons -->
+            <div class="mt-6 flex flex-col md:flex-row gap-3">
+                <button class="w-full bg-gray-200 text-black py-3 rounded uppercase">Add to Cart</button>
+                <button class="w-full bg-black text-white py-3 rounded uppercase font-semibold">Buy It Now</button>
+            </div>
+
+            <!-- Trust Info -->
+            <div class="mt-8 flex flex-col sm:flex-row justify-between text-sm text-center text-gray-700 gap-6">
+                <div class="flex flex-col items-center gap-1">
+                    <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" class="w-6 h-6" />
+                    <p>4 Lakhs+ Satisfied<br>Customers</p>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <img src="https://cdn-icons-png.flaticon.com/512/484/484662.png" class="w-6 h-6" />
+                    <p>7 Days Easy Return&<br>Exchange</p>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <img src="https://cdn-icons-png.flaticon.com/512/892/892458.png" class="w-6 h-6" />
+                    <p>100% Cotton<br>Material</p>
+                </div>
+            </div>
+
+            <!-- Offers -->
+            <h2 class="mt-10 text-lg font-bold">Available offers</h2>
+            <!-- Add offers here -->
+        </div>
+    </div>
+
+    <footer class="bg-black text-white text-center p-4 mt-10">
+        <p>&copy; 2025 STREETVYB. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        let quantity = 1;
+        let selectedSize = null;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const qtyDisplay = document.getElementById("quantity");
+            const incBtn = document.getElementById("increaseQty");
+            const decBtn = document.getElementById("decreaseQty");
+            const addToCartBtn = document.querySelector("button.bg-gray-200");
+            const sizeButtons = document.querySelectorAll(".size-btn");
+
+            // Quantity buttons
+            incBtn.addEventListener("click", () => {
+                quantity++;
+                qtyDisplay.innerText = quantity;
+            });
+
+            decBtn.addEventListener("click", () => {
+                if (quantity > 1) {
+                    quantity--;
+                    qtyDisplay.innerText = quantity;
+                }
+            });
+
+            // Size selection logic
+            sizeButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    sizeButtons.forEach(btn => btn.classList.remove("bg-black", "text-white"));
+                    button.classList.add("bg-black", "text-white");
+                    selectedSize = button.getAttribute("data-size");
+                    console.log("Selected size:", selectedSize);
+                });
+            });
+
+            // Add to Cart click
+            addToCartBtn.addEventListener("click", () => {
+                if (!selectedSize) {
+                    toastr.warning("Please select a size before adding to cart.");
+                    return;
+                }
+
+                const product = {
+                    id: 1,
+                    name: "Wild Grey Relaxed Fit T-Shirt",
+                    price: 799,
+                    size: selectedSize,
+                    quantity: quantity,
+                    image: "img/tshirt/t1.png"
+                };
+
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                const existingIndex = cart.findIndex(item => item.id === product.id && item.size === product.size);
+                if (existingIndex !== -1) {
+                    cart[existingIndex].quantity += quantity;
+                } else {
+                    cart.push(product);
+                }
+
+                localStorage.setItem("cart", JSON.stringify(cart));
+                toastr.success(`${product.name} (${selectedSize}) x${quantity} added to cart!`);
+
+                // Reset after add
+                quantity = 1;
+                selectedSize = null;
+                qtyDisplay.innerText = quantity;
+                sizeButtons.forEach(btn => btn.classList.remove("bg-black", "text-white"));
+            });
+        });
+    </script>
+    <script>
+        const getWishlist = () => JSON.parse(localStorage.getItem("wishlist")) || [];
+        const setWishlist = (list) => localStorage.setItem("wishlist", JSON.stringify(list));
+
+        const toggleWishlist = (productId) => {
+            let wishlist = getWishlist();
+            const index = wishlist.indexOf(productId);
+            const btn = document.getElementById(`wishlist-btn-${productId}`);
+
+            if (index !== -1) {
+                wishlist.splice(index, 1); // Remove
+                btn.classList.remove("text-red-500");
+                btn.classList.add("text-gray-400");
+                toast("Removed from wishlist", "🤍");
+            } else {
+                wishlist.push(productId); // Add
+                btn.classList.remove("text-gray-400");
+                btn.classList.add("text-red-500");
+                toast("Added to wishlist", "❤️");
+            }
+
+            setWishlist(wishlist);
+        };
+
+
+        const loadWishlistUI = () => {
+            const wishlist = getWishlist();
+            wishlist.forEach(id => {
+                const btn = document.getElementById(`wishlist-btn-${id}`);
+                if (btn) {
+                    btn.classList.remove("text-gray-400");
+                    btn.classList.add("text-red-500");
+                }
+            });
+        };
+
+        const toast = (msg, icon = "🔔") => {
+            const toast = document.createElement("div");
+            toast.className = "fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded shadow text-sm z-50";
+            toast.innerHTML = `${icon} ${msg}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        };
+
+        document.addEventListener("DOMContentLoaded", loadWishlistUI);
+
+    </script>
+
+    <script>
+        const allProducts = [
+            {
+                id: 1,
+                name: 'Wild Grey Relaxed Fit T-Shirt',
+                price: 799,
+                image: 'img/tshirt/t1.png'
+            },
+            {
+                id: 2,
+                name: 'Ocean Blue Oversized Tee',
+                price: 899,
+                image: 'img/tshirt/t2.png'
+            },
+            // aur bhi products...
+        ];
+    </script>
+<script>
+    // Sample product data
+    const productData = {
+        1: {
+            id: 1,
+            name: "Cool T-Shirt",
+            image: "img/tshirt/t1.png",
+            price: "₹899"
+        }
+        // Add more products here as needed
+    };
+
+    function toggleWishlistById(productId) {
+        const heartIcon = document.getElementById(`heart-icon-${productId}`);
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+        const index = wishlist.findIndex(item => item.id === productId);
+        if (index === -1) {
+            // Add to wishlist
+            wishlist.push(productData[productId]);
+            heartIcon.classList.add("text-red-500");
+            heartIcon.classList.remove("text-gray-400");
+        } else {
+            // Remove from wishlist
+            wishlist.splice(index, 1);
+            heartIcon.classList.remove("text-red-500");
+            heartIcon.classList.add("text-gray-400");
+        }
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    }
+</script>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</body>
+
+</html>

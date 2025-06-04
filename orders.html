@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Orders</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-1/4 bg-white p-6 shadow-md">
+       <h1 class="text-2xl font-bold mb-6">Hello, User</h1>
+            <nav>
+                <ul class="space-y-4">
+                    <li><a href="orders.html" class="block text-blue-700 hover:text-black">My Orders</a></li>
+                    <li><a href="account.html" class="block text-gray-600 font-semibold">Account Settings</a></li>
+                    <li><a href="payments.html" class="block text-gray-700 hover:text-black">Payments</a></li>
+                </ul>
+            </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-10 bg-gray-50">
+      <h1 class="text-3xl font-bold text-gray-800 mb-8">My Orders</h1>
+
+      <!-- Orders List -->
+      <section class="space-y-6">
+        <!-- Order Item -->
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-6 flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900">DALUCI Strong Adhesive Wall Door Sticky</h2>
+            <p class="text-gray-500 mt-1">Color: Clear</p>
+            <p class="text-gray-700 font-medium mt-2">₹999</p>
+          </div>
+          <div class="text-right">
+            <p class="text-green-600 font-medium mb-2">Delivered on Mar 02</p>
+            <button id="reviewButton1" class="text-blue-500 hover:underline">Rate & Review Product</button>
+          </div>
+        </div>
+
+        <!-- Order Item -->
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-6 flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900">ROADWAY Rectangular Sunglasses</h2>
+            <p class="text-gray-500 mt-1">Size: Free Size</p>
+            <p class="text-gray-700 font-medium mt-2">₹999</p>
+          </div>
+          <div class="text-right">
+            <p class="text-green-600 font-medium mb-2">Delivered on Feb 12</p>
+            <button id="reviewButton2" class="text-blue-500 hover:underline">Rate & Review Product</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Review Modal -->
+  <div id="reviewModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white w-full max-w-md mx-auto rounded-xl shadow-lg p-6 animate-fadeIn">
+      <h2 class="text-xl font-bold mb-4 text-gray-800">Rate & Review Product</h2>
+      <textarea placeholder="Write your review..." class="w-full h-28 border rounded-md p-3 focus:outline-none focus:ring focus:ring-blue-300 resize-none mb-4"></textarea>
+      <div class="flex justify-end space-x-3">
+        <button id="closeModal" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("reviewModal");
+    const closeModal = document.getElementById("closeModal");
+
+    // Buttons to open modal
+    document.getElementById("reviewButton1").addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+    document.getElementById("reviewButton2").addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    closeModal.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+
+    // Optional: click outside modal to close
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  </script>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-out;
+    }
+  </style>
+</body>
+</html>

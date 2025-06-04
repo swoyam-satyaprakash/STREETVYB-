@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-black text-white p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <img src="img/logo/logo.svg" alt="STREETVYB Logo" class="h-10" style="width: 50px; height: 50px;">
+            <h1 class="text-2xl font-bold">STREETVYB</h1>
+        </div>
+        <ul class="flex space-x-6">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hoodies.html" class="font-bold" >Hoodies</a></li>
+            <li><a href="contact.html">contact</a></li>
+            <li><a href="T-shirt.html" >T-shirt</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+
+        <form action="search.html" method="GET" class="relative">
+            <div class="relative">
+                <input type="text" name="query" placeholder="Search for products..." 
+                    class="px-10 py-2 w-72 bg-gray-700 text-white rounded-md focus:outline-none">
+                <!-- Search Icon -->
+                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16 10.5A5.5 5.5 0 1110.5 5 5.5 5.5 0 0116 10.5z"/>
+                </svg>
+            </div>
+        </form>
+
+    </nav>
+
+    <div class="max-w-5xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <img id="productImage" src="img/hoodies/hoodie1.jpg" alt="Product Image" class="w-full rounded-lg">
+            </div>
+            <div>
+                <h2 id="productName" class="text-2xl font-bold mb-2">Debbaco Print Maxi Dress</h2>
+                <p class="text-gray-600">⭐⭐⭐⭐⭐ (1555 reviews)</p>
+                <p id="productPrice" class="text-2xl font-bold text-red-600">₹2,299.00
+                    <span class="text-gray-500 line-through ml-3">₹5,999.00</span>
+                    <span class="text-green-600 ml-2">62% off</span>
+                </p>
+                <p class="text-gray-600 mb-4">Inclusive of all Taxes</p>
+
+                <h3 class="font-semibold">Size</h3>
+                <div class="flex space-x-2 my-2">
+                    <button
+                        class="size-btn px-4 py-2 border rounded-lg transition transform hover:scale-105">XS</button>
+                    <button class="size-btn px-4 py-2 border rounded-lg transition transform hover:scale-105">S</button>
+                    <button class="size-btn px-4 py-2 border rounded-lg transition transform hover:scale-105">M</button>
+                    <button class="size-btn px-4 py-2 border rounded-lg transition transform hover:scale-105">L</button>
+                    <button class="size-btn px-4 py-2 border rounded-lg transition transform hover:scale-105">XL</button>
+                </div>
+                <!-- Size Selection -->
+
+                <button id="addToCart"
+                    class="bg-red-500 text-white px-6 py-2 rounded-lg w-full mt-4 transition-transform transform hover:scale-105">ADD TO CART</button>
+                    <button id="wishlistBtn"
+                    class="mt-4 text-gray-500 text-2xl transition-transform transform hover:scale-110">🤍</button>
+                <!-- Order Process -->
+                <div class="grid grid-cols-3 text-center mt-6">
+                    <div>
+                        <span class="block text-lg font-semibold">📦 Order Placed</span>
+                        <span class="text-gray-600">Mar 02</span>
+                    </div>
+                    <div>
+                        <span class="block text-lg font-semibold">🚚 Order Ready</span>
+                        <span class="text-gray-600">Mar 02 - Mar 04</span>
+                    </div>
+                    <div>
+                        <span class="block text-lg font-semibold">📍 Delivered</span>
+                        <span class="text-gray-600">Mar 05 - Mar 06</span>
+                    </div>
+                </div>
+
+                <!-- Best Offers -->
+                <div class="mt-6 bg-gray-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg">Best Offers</h3>
+                    <p class="text-gray-600">Get Extra 5% Off</p>
+                    <p class="text-sm text-gray-500">Use Coupon Code: <strong>CART5</strong></p>
+                </div>
+
+                <!-- Share & WhatsApp -->
+                <div class="flex justify-between items-center mt-6">
+                    <div class="flex space-x-4">
+                        <span class="text-lg cursor-pointer">🔗 Share</span>
+                        <span class="text-lg cursor-pointer">📌 Pin it</span>
+                    </div>
+                    <a href="#" class="text-green-500 text-lg">💬 WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- Toast Container -->
+<div id="toast" class="fixed bottom-6 right-6 bg-black text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 z-50"></div>
+
+<script>
+    // 🔥 Toast Notification
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("opacity-100");
+        setTimeout(() => toast.classList.remove("opacity-100"), 2500);
+    }
+
+    // 🛒 Add to Cart
+    document.getElementById("addToCart").addEventListener("click", function () {
+        const product = {
+            name: document.getElementById("productName").textContent,
+            price: document.getElementById("productPrice").textContent,
+            image: document.getElementById("productImage").src,
+            size: document.querySelector(".size-btn.selected")?.textContent || "M"
+        };
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // ✅ Toast
+        showToast(`${product.name} added to cart 🛒`);
+    });
+
+    // 📏 Size Selection with Bounce Animation
+    document.querySelectorAll(".size-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".size-btn").forEach(btn =>
+                btn.classList.remove("selected", "bg-red-500", "text-white", "scale-110", "shadow-md")
+            );
+            this.classList.add("selected", "bg-red-500", "text-white", "transition-transform", "transform", "scale-110", "shadow-md");
+        });
+    });
+
+    // ❤️ Wishlist Functionality
+    document.addEventListener("DOMContentLoaded", function () {
+        const wishlistBtn = document.getElementById("wishlistBtn");
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+        const product = {
+            name: document.getElementById("productName").textContent,
+            price: document.getElementById("productPrice").textContent,
+            image: document.getElementById("productImage").src
+        };
+
+        const isInWishlist = () => wishlist.find(item => item.name === product.name);
+
+        const updateWishlistIcon = () => {
+            wishlistBtn.textContent = isInWishlist() ? "❤️" : "🤍";
+            wishlistBtn.classList.add("animate-pulse");
+            setTimeout(() => wishlistBtn.classList.remove("animate-pulse"), 300);
+        };
+
+        updateWishlistIcon();
+
+        wishlistBtn.addEventListener("click", function () {
+            const index = wishlist.findIndex(item => item.name === product.name);
+            if (index === -1) {
+                wishlist.push(product);
+                showToast(`${product.name} added to wishlist ❤️`);
+            } else {
+                wishlist.splice(index, 1);
+                showToast(`${product.name} removed from wishlist 💔`);
+            }
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            updateWishlistIcon();
+        });
+    });
+</script>
+
+</body>
+
+</html>

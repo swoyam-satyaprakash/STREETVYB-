@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - STREETVYB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex">
+        <!-- Sidebar -->
+        <aside class="w-1/4 bg-white shadow-md p-6">
+            <h1 class="text-2xl font-bold mb-6">Hello, User</h1>
+            <nav>
+                <ul class="space-y-4">
+                    <li><a href="orders.html" class="block text-blue-700 hover:text-black">My Orders</a></li>
+                    <li><a href="account.html" class="block text-gray-600 font-semibold">Account Settings</a></li>
+                    <li><a href="payments.html" class="block text-gray-700 hover:text-black">Payments</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8 bg-white shadow-lg rounded-lg mt-10">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Personal Information</h2>
+        
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <input type="text" placeholder="First Name" class="p-3 border rounded-lg w-full focus:ring-2 focus:ring-blue-500" value="Swayam">
+                <input type="text" placeholder="Last Name" class="p-3 border rounded-lg w-full focus:ring-2 focus:ring-blue-500" value="Beher">
+            </div>
+        
+            <div class="mb-6">
+                <label class="block font-semibold mb-2 text-gray-700">Your Gender</label>
+                <div class="flex gap-6">
+                    <label class="flex items-center">
+                        <input type="radio" name="gender" class="mr-2" checked> Male
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="gender" class="mr-2"> Female
+                    </label>
+                </div>
+            </div>
+        
+            <div class="mb-6">
+                <label class="block font-semibold mb-2 text-gray-700">Email Address</label>
+                <input type="email" class="p-3 border rounded-lg w-full focus:ring-2 focus:ring-blue-500" value="user@example.com">
+            </div>
+        
+            <div class="mb-6">
+                <label class="block font-semibold mb-2 text-gray-700">Mobile Number</label>
+                <input type="text" class="p-3 border rounded-lg w-full focus:ring-2 focus:ring-blue-500" value="+91 9876543210">
+            </div>
+        
+            <h2 class="text-xl font-bold mt-8 mb-4 text-gray-800">FAQs</h2>
+            <div class="text-gray-600 mb-4">
+                <p class="font-medium">What happens when I update my email address (or mobile number)?</p>
+                <p class="text-gray-500 text-sm">Your login email ID or mobile number changes, and you'll receive all communication on the updated email or number. You will also be prompted to verify the change via OTP.</p>
+            </div>
+        
+            <!-- Additional Interactive Section -->
+            <div class="bg-gray-100 p-4 rounded-md shadow-md mt-8">
+                <h3 class="font-semibold text-lg text-gray-700">Security Settings</h3>
+                <div class="flex justify-between items-center mt-4">
+                    <p class="text-sm text-gray-600">Enable Two-Factor Authentication (2FA)</p>
+                    <input type="checkbox" class="h-5 w-5 text-blue-500 border-gray-300 rounded-full transition duration-200 ease-in-out">
+                </div>
+                <p class="text-sm text-gray-500 mt-2">Enable 2FA to enhance the security of your account.</p>
+            </div>
+        </main>
+        
+        <script>
+            // Check if Two-Factor Authentication is enabled in local storage
+            document.addEventListener("DOMContentLoaded", function() {
+                const twofaCheckbox = document.getElementById('twofa-checkbox');
+                const twofaStatus = document.getElementById('twofa-status');
+        
+                // Retrieve the saved state of 2FA from localStorage
+                const isTwoFAEnabled = JSON.parse(localStorage.getItem('twofaEnabled')) || false;
+        
+                // Set the checkbox state and update the message based on saved state
+                twofaCheckbox.checked = isTwoFAEnabled;
+                updateTwoFAStatus(isTwoFAEnabled);
+        
+                // Add event listener to the checkbox
+                twofaCheckbox.addEventListener('change', function() {
+                    const isChecked = twofaCheckbox.checked;
+                    localStorage.setItem('twofaEnabled', JSON.stringify(isChecked)); // Save to localStorage
+                    updateTwoFAStatus(isChecked);
+                });
+            });
+        
+            // Function to update the status message
+            function updateTwoFAStatus(isEnabled) {
+                const twofaStatus = document.getElementById('twofa-status');
+                if (isEnabled) {
+                    twofaStatus.textContent = "Two-Factor Authentication (2FA) is now enabled. Your account is more secure!";
+                    twofaStatus.classList.add('text-green-500');
+                    twofaStatus.classList.remove('text-gray-500');
+                } else {
+                    twofaStatus.textContent = "Enable 2FA to enhance the security of your account.";
+                    twofaStatus.classList.add('text-gray-500');
+                    twofaStatus.classList.remove('text-green-500');
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
+

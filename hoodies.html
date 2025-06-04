@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STREETVYB - Hoodies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes expandSearch {
+            from { width: 48px; opacity: 0.5; }
+            to { width: 200px; opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .scale-in {
+            animation: scaleUp 1s ease-out;
+        }
+
+        .navbar {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar.shrink {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .parallax {
+            background-image: url('img/banner/hoodies-banner.jpg');
+            height: 500px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .search-input {
+            width: 48px;
+            transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0.5;
+        }
+
+        .search-input:focus {
+            width: 200px;
+            opacity: 1;
+            animation: expandSearch 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <nav class="bg-black text-white p-4 flex justify-between items-center fixed top-0 left-0 w-full z-50 shadow-lg navbar">
+        <div class="flex items-center space-x-4">
+            <img src="img/logo/logo.svg" alt="STREETVYB Logo" class="h-10 w-10">
+            <h1 class="text-2xl font-bold">STREETVYB</h1>
+        </div>
+        <ul class="flex space-x-6">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hoodies.html" class="font-bold">Hoodies</a></li>
+            <li><a href="T-shirt.html">T-Shirts</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="contact.html">contact</a></li>
+        </ul>
+        <!-- Search Bar -->
+        <div class="relative">
+            <form action="search.html" method="GET" class="relative">
+              <input type="text" placeholder="Search for products..." 
+                  class="px-10 py-2 w-72 bg-gray-700 text-white rounded-md focus:outline-none">
+              <!-- Search Icon -->
+              <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16 10.5A5.5 5.5 0 1110.5 5 5.5 5.5 0 0116 10.5z"/>
+              </svg>
+            </form>
+          </div>
+    </nav>
+
+    <div class="parallax"></div>
+
+    <div class="container mx-auto py-20 px-6 fade-in">
+        <h2 class="text-3xl font-bold mb-6 text-center scale-in">Our Hoodie Collection</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="bg-white shadow-lg rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                <a href="hoodie-details.html">
+                    <img src="img/hoodies/hoodie1.jpg" alt="Graphic Hoodie" class="w-full rounded-md">
+                </a>
+                <h3 class="text-lg font-semibold mt-2">Graphic Hoodie</h3>
+                <p class="text-gray-600">₹1999 <span class="line-through text-red-500">₹2499</span></p>
+                <button class="mt-2 w-full bg-black text-white py-2 rounded-md hover:bg-red-600 transition-all">Buy Now</button>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                <img src="img/hoodies/hoodie1.jpg" alt="Oversized Hoodie" class="w-full rounded-md">
+                <h3 class="text-lg font-semibold mt-2">Oversized Hoodie</h3>
+                <p class="text-gray-600">₹1499</p>
+                <button class="mt-2 w-full bg-black text-white py-2 rounded-md hover:bg-red-600 transition-all">Buy Now</button>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                <img src="img/hoodies/hoodie1.jpg" alt="Oversized Hoodie" class="w-full rounded-md">
+                <h3 class="text-lg font-semibold mt-2">Oversized Hoodie</h3>
+                <p class="text-gray-600">₹1499</p>
+                <button class="mt-2 w-full bg-black text-white py-2 rounded-md hover:bg-red-600 transition-all">Buy Now</button>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-4 transform transition-all duration-300 hover:scale-105">
+                <img src="img/hoodies/hoodie1.jpg" alt="Oversized Hoodie" class="w-full rounded-md">
+                <h3 class="text-lg font-semibold mt-2">Oversized Hoodie</h3>
+                <p class="text-gray-600">₹1499</p>
+                <button class="mt-2 w-full bg-black text-white py-2 rounded-md hover:bg-red-600 transition-all">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-black text-white text-center p-4 mt-10">
+        <p>&copy; 2025 STREETVYB. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            let navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shrink');
+            } else {
+                navbar.classList.remove('shrink');
+            }
+        });
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Inn</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+                opacity: 1;
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+                opacity: 0.8;
+            }
+
+            40% {
+                transform: translate(2px, -2px);
+                opacity: 1;
+            }
+
+            60% {
+                transform: translate(-2px, 2px);
+                opacity: 0.8;
+            }
+
+            80% {
+                transform: translate(2px, -2px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(0);
+                opacity: 1;
+            }
+        }
+
+        .glitch {
+            animation: glitch 0.7s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .scale-in {
+            animation: scaleUp 1s ease-out;
+        }
+
+        .navbar {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar.shrink {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .parallax {
+            background-image: url('img/banner/banner.jpg');
+            height: 500px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .slide {
+            min-width: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Updated Tagline Styling */
+        .tagline {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            text-align: center;
+            letter-spacing: 2px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-transform: uppercase;
+            line-height: 1.4;
+            z-index: 1;
+        }
+
+        .sub-tagline {
+            display: block;
+            font-size: 1.5rem;
+            margin-top: 10px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+
+        /* Background Image for Our Collection */
+        .bg-image {
+            /* background-image: url('img/banner/p-bg.jpg'); */
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            animation: moveBg 10s linear infinite;
+        }
+
+
+        .bg-opacity-50 {
+            position: relative;
+        }
+
+        .bg-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(124, 15, 15, 0.5);
+            /* Overlay effect */
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        h2 {
+            color: #ffffff;
+            z-index: 3;
+        }
+
+        .grid {
+            position: relative;
+            z-index: 3;
+        }
+
+        .grid div {
+            border: 1px solid #444;
+            /* Subtle border for product items */
+        }
+
+        @keyframes moveBg {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+    </style>
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="bg-gray-100 font-sans"></div>
+    <nav
+        class="bg-black text-white p-4 flex justify-between items-center fixed top-0 left-0 w-full z-50 shadow-lg navbar">
+        <div class="flex items-center space-x-4">
+            <img src="img/logo/logo.svg" alt="STREETVYB Logo" class="h-10 w-10">
+            <h1 class="text-2xl font-bold">STREETVYB</h1>
+        </div>
+        <ul class="flex-1 flex justify-center space-x-6">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hoodies.html">Hoodies</a></li>
+            <li><a href="T-shirt.html">T-Shirts</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="contact.html">contact</a></li>
+        </ul>
+
+        <!-- Search Bar -->
+        <div class="relative">
+            <form action="search.html" method="GET" class="relative">
+                <input type="text" placeholder="Search for products..."
+                    class="px-10 py-2 w-72 bg-gray-700 text-white rounded-md focus:outline-none">
+                <!-- Search Icon -->
+                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-4.35-4.35M16 10.5A5.5 5.5 0 1110.5 5 5.5 5.5 0 0116 10.5z" />
+                </svg>
+            </form>
+        </div>
+    </nav>
+    </div>
+
+    <h1 class="text-black text-4xl font-bold text-center mt-32 mb-4 tracking-widest">NEW INN</h1>
+
+
+    <div class="bg-cover bg-center p-8 rounded-md bg-white-950 text-white">
+        <div class="bg-white text-white">
+            <div id="category-scroll" class="flex overflow-x-auto space-x-6 px-4 py-6 hide-scrollbar cursor-default"
+                style="-ms-overflow-style: none; scrollbar-width: none; user-select: none;">
+                <div class="flex space-x-6">
+                    <!-- 1st Category -->
+                    <div class="flex flex-col items-center">
+                        <div
+                            class="w-28 h-28 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-sm text-center">
+                            <div>
+                                SALE<br /><span class="text-xs font-light">UPTO 70% OFF</span>
+                            </div>
+                        </div>
+                        <span class="mt-2 text-xs font-medium text-gray-800">SALE</span>
+                    </div>
+
+                    <!-- Example Category with Image -->
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://via.placeholder.com/100" alt="SWEATSHIRT"
+                            class="w-28 h-28 rounded-full object-cover border-2 border-gray-200" />
+                        <span class="mt-2 text-base font-semibold text-gray-800">SWEATSHIRT</span>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="container mx-auto py-10 px-4">
+                <!-- <h2 class="text-3xl font-bold mb-10 text-center">Our Collection</h2> -->
+
+                <section class="py-10 px-4 max-w-[1600px] mx-auto">
+                    <h2 class=" text-black text-3xl font-semibold text-center mb-8">NEW ARRIVALS</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                        <!-- Product Card 1 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class="text-black text-sm font-medium mb-1">Chase Onyx Heavy Weight Oversized Fit
+                                    T-Shirt</h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,699.00</span>
+                                    <span class="line-through text-gray-500 ml-2">₹1,999.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 2 -->
+                        <div class="border">
+                            <div class="relative">
+                                <span
+                                    class="absolute top-2 left-2 bg-orange-500 text-white text-xs font-semibold px-2 py-1 rounded">SAVE
+                                    ₹400.00</span>
+                                <img src="img/tshirt/t1.png" alt="Product 2" class="w-full h-auto object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-black text-sm font-medium mb-1">Green Surge Oversized T-shirt</h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,599.00</span>
+                                    <span class="line-through text-gray-500 ml-2">₹1,999.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 3 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class="text-black text-sm font-medium mb-1">Blazing Wild Relaxed Fit T-Shirt</h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,299.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 4 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class="text-black text-sm font-medium mb-1">Glory Arc Relaxed Fit T-Shirt - 100%
+                                    Cotton
+                                </h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,299.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 5 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class=" text-black text-sm font-medium mb-1">Chase Onyx Heavy Weight Oversized Fit
+                                    T-Shirt</h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,699.00</span>
+                                    <span class="line-through text-gray-500 ml-2">₹1,999.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 6 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class="text-black text-sm font-medium mb-1">Green Surge Oversized T-shirt</h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,599.00</span>
+                                    <span class="line-through text-gray-500 ml-2">₹1,999.00</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Product Card 7 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class=" text-black text-sm font-medium mb-1">Blazing Wild Relaxed Fit T-Shirt</h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,299.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 8 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class="text-black text-sm font-medium mb-1">Glory Arc Relaxed Fit T-Shirt - 100%
+                                    Cotton
+                                </h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,299.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 9 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class=" text-black text-sm font-medium mb-1">Chase Onyx Heavy Weight Oversized Fit
+                                    T-Shirt</h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,699.00</span>
+                                    <span class="line-through text-gray-500 ml-2">₹1,999.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 10 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class="text-black text-sm font-medium mb-1">Green Surge Oversized T-shirt</h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,599.00</span>
+                                    <span class="line-through text-gray-500 ml-2">₹1,999.00</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Product Card 11 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class=" text-black text-sm font-medium mb-1">Blazing Wild Relaxed Fit T-Shirt</h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,299.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 12 -->
+                        <div class="border">
+                            <a href="T-shirt-product-details.html">
+                                <img src="img/tshirt/t1.png" alt="Graphic Tee" class="w-full h-auto object-cover">
+                            </a>
+                            <div class="p-4">
+                                <h3 class="text-black text-sm font-medium mb-1">Glory Arc Relaxed Fit T-Shirt - 100%
+                                    Cotton
+                                </h3>
+                                <div class="text-sm text-gray-800">
+                                    <span class="text-orange-600 font-semibold">₹1,299.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <script>
+                    window.addEventListener('scroll', function () {
+                        let navbar = document.querySelector('.navbar');
+                        if (window.scrollY > 50) {
+                            navbar.classList.add('shrink');
+                        } else {
+                            navbar.classList.remove('shrink');
+                        }
+                    });
+                </script>
+                <!-- Category Scroll Script -->
+                <script>
+                    const slider = document.getElementById("category-scroll");
+                    let isDown = false;
+                    let startX;
+                    let scrollLeft;
+
+                    slider.addEventListener("mousedown", (e) => {
+                        isDown = true;
+                        startX = e.pageX - slider.offsetLeft;
+                        scrollLeft = slider.scrollLeft;
+                    });
+
+                    slider.addEventListener("mouseleave", () => {
+                        isDown = false;
+                    });
+
+                    slider.addEventListener("mouseup", () => {
+                        isDown = false;
+                    });
+
+                    slider.addEventListener("mousemove", (e) => {
+                        if (!isDown) return;
+                        e.preventDefault();
+                        const x = e.pageX - slider.offsetLeft;
+                        const walk = (x - startX) * 2;
+                        slider.scrollLeft = scrollLeft - walk;
+                    });
+                </script>
+
+                <script>
+                    document.getElementById("profileBtn").addEventListener("click", function () {
+                        document.getElementById("profileDropdown").classList.toggle("hidden");
+                    });
+                </script>
+</body>
+
+</html>

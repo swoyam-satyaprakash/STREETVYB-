@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - STREETVYB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <nav
+        class="bg-black text-white p-4 flex justify-between items-center fixed top-0 left-0 w-full z-50 shadow-lg navbar">
+        <div class="flex items-center space-x-4">
+            <img src="img/logo/logo.svg" alt="STREETVYB Logo" class="h-10 w-10">
+            <h1 class="text-2xl font-bold">STREETVYB</h1>
+        </div>
+        <ul class="flex space-x-6">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hoodies.html">Hoodies</a></li>
+            <li><a href="T-shirt.html">T-Shirts</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="wishlist.html" class="font-bold">Wishlist</a></li>
+            <li><a href="contact.html">contact</a></li>
+        </ul>
+        <!-- Search Bar -->
+        <div class="relative">
+            <form action="search.html" method="GET" class="relative">
+                <input type="text" placeholder="Search for products..."
+                    class="px-10 py-2 w-72 bg-gray-700 text-white rounded-md focus:outline-none">
+                <!-- Search Icon -->
+                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-4.35-4.35M16 10.5A5.5 5.5 0 1110.5 5 5.5 5.5 0 0116 10.5z" />
+                </svg>
+            </form>
+        </div>
+    </nav>
+
+    <section class="p-6 mt-16">
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
+            <button class="bg-gray-500 text-white px-4 py-2 rounded mb-4" onclick="clearWishlist()">Clear
+                Wishlist</button>
+            <div id="wishlist-items" class="space-y-4"></div>
+        </div>
+    </section>
+
+    <div id="wishlist-items" class="p-4"></div>
+
+
+    <script>
+        const getWishlist = () => JSON.parse(localStorage.getItem("wishlist")) || [];
+        const setWishlist = (wishlist) => localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+        const getCart = () => JSON.parse(localStorage.getItem("cart")) || [];
+        const setCart = (cart) => localStorage.setItem("cart", JSON.stringify(cart));
+
+        const wishlistContainer = document.getElementById("wishlist-items");
+
+        const displayWishlist = () => {
+            const wishlist = getWishlist();
+            wishlistContainer.innerHTML = wishlist.length === 0
+                ? `<p class="text-gray-600 italic">Your wishlist is empty!</p>`
+                : "";
+
+            wishlist.forEach((item, index) => {
+                const wishlistItem = document.createElement("div");
+                wishlistItem.className = "flex justify-between items-center border-b pb-3 mb-3";
+
+                wishlistItem.innerHTML = `
+                <div class="flex items-center gap-4">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded shadow-sm">
+                    <div>
+                        <a href="product-details.html?name=${encodeURIComponent(item.name)}"
+                            class="text-blue-600 hover:underline font-medium">${item.name}</a>
+                        <p class="text-sm text-gray-700">₹${item.price}</p>
+                        <input type="number" min="1" value="1" class="w-14 mt-1 border rounded p-1 text-center text-sm" id="quantity-${index}">
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="moveToCart(${index})"
+                        class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm shadow-sm transition">Move</button>
+                    <button onclick="removeFromWishlist(${index})"
+                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm shadow-sm transition">Remove</button>
+                </div>
+            `;
+                wishlistContainer.appendChild(wishlistItem);
+            });
+        };
+
+        const removeFromWishlist = (index) => {
+            const wishlist = getWishlist();
+            wishlist.splice(index, 1);
+            setWishlist(wishlist);
+            displayWishlist();
+            toast("Item removed from wishlist", "❌");
+        };
+
+        const moveToCart = (index) => {
+            const wishlist = getWishlist();
+            const cart = getCart();
+            const quantityInput = document.getElementById(`quantity-${index}`);
+            const quantity = parseInt(quantityInput.value) || 1;
+
+            cart.push({ ...wishlist[index], quantity });
+            setCart(cart);
+            removeFromWishlist(index);
+            toast("Item moved to cart", "🛒");
+        };
+
+        const addToWishlist = (item) => {
+            const wishlist = getWishlist();
+            const alreadyExists = wishlist.some(wishItem => wishItem.name === item.name);
+
+            if (!alreadyExists) {
+                wishlist.push(item);
+                setWishlist(wishlist);
+                displayWishlist();
+                toast("Item added to wishlist!", "💖");
+            } else {
+                toast("Item already in wishlist!", "⚠️");
+            }
+        };
+
+        const clearWishlist = () => {
+            localStorage.removeItem("wishlist");
+            displayWishlist();
+            toast("Wishlist cleared", "🧹");
+        };
+
+        const toast = (message, icon = "🔔") => {
+            const toast = document.createElement("div");
+            toast.className = "fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg text-sm z-50 animate-fade-in-out";
+            toast.innerHTML = `${icon} ${message}`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 2500);
+        };
+
+        // Mobile menu toggle (optional)
+        document.getElementById("menu-btn")?.addEventListener("click", () => {
+            document.getElementById("menu")?.classList.toggle("hidden");
+        });
+
+        document.addEventListener("DOMContentLoaded", displayWishlist);
+    </script>
+    <style>
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            20% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            80% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+        }
+
+        .animate-fade-in-out {
+            animation: fadeInOut 2.5s ease forwards;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+            const container = document.getElementById("wishlist-container");
+
+            if (wishlist.length === 0) {
+                container.innerHTML = "<p>No items in wishlist.</p>";
+                return;
+            }
+
+            wishlist.forEach(product => {
+                container.innerHTML += `
+                <div class="p-4 border-b border-gray-300">
+                    <img src="${product.image}" alt="${product.name}" class="w-24 h-24 object-cover">
+                    <h2 class="text-lg font-bold">${product.name}</h2>
+                    <p>${product.price}</p>
+                </div>
+            `;
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>
